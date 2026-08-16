@@ -467,6 +467,8 @@
       if (el.closest('.field').classList.contains('invalid')) validateField(el);
     });
   });
+  // PREVIEW: odosielanie vypnuté, kým klient neschváli frontend — potom zmaž tento blok
+  const SUBMIT_DISABLED = true;
   form.addEventListener('submit', (e) => {
     const fields = [...form.querySelectorAll('input[required], textarea[required]')];
     const allValid = fields.map(validateField).every(Boolean);
@@ -481,6 +483,12 @@
       e.preventDefault();
       status.className = 'form-status fail';
       status.textContent = 'Ešte spracúvame fotky, skús to o chvíľu znova.';
+      return;
+    }
+    if (SUBMIT_DISABLED) {
+      e.preventDefault();
+      status.className = 'form-status';
+      status.textContent = 'Toto je náhľadová verzia webu, odosielanie zatiaľ nie je zapnuté.';
       return;
     }
     const submit = document.getElementById('f-submit');
