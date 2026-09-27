@@ -345,7 +345,15 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   margin-top: 2.4rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero .hero-icon {
+  width: 51px;
+  height: 51px;
+  background: rgba(16, 21, 15, 0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -374,9 +382,9 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
    O NÁS
    ============================================================ */
 .about-copy {
-  max-width: 960px;
+  max-width: 720px;
   margin-inline: auto;
-  text-align: left;
+  text-align: center;
   display: grid;
   gap: 1.4rem;
 }
@@ -385,17 +393,6 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   font-weight: 500;
   line-height: 1.55;
   color: var(--paper);
-  border-left: 2px solid var(--leaf);
-  padding-left: clamp(1.1rem, 2.5vw, 1.6rem);
-}
-@media (min-width: 901px) {
-  .about-copy {
-    grid-template-columns: 1fr 1fr;
-    column-gap: clamp(2.5rem, 5vw, 4.5rem);
-    align-items: start;
-  }
-  .about-copy .intro { grid-row: 1 / span 2; }
-  .about-copy p:not(.intro) { grid-column: 2; }
 }
 
 .values {
@@ -413,20 +410,17 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   gap: 1rem;
 }
 .values .icon-3d {
-  width: 104px;
-  height: 104px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--tile);
-  box-shadow: inset 0 0 0 1px var(--line-soft);
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
 }
-.values .icon-3d img { width: 100%; height: 100%; object-fit: cover; }
+.values .icon-3d img { width: 100%; height: 100%; object-fit: contain; }
 .values h3 { font-size: 1.05rem; letter-spacing: 0.07em; }
 .values p { font-size: 0.94rem; color: var(--sage); max-width: 30ch; }
 @media (max-width: 700px) {
   .values { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1rem; }
   .values li { gap: 0.75rem; }
-  .values .icon-3d { width: 84px; height: 84px; border-radius: 12px; }
+  .values .icon-3d { width: 104px; height: 104px; }
   .values h3 { font-size: 0.9rem; letter-spacing: 0.06em; }
   .values p { font-size: 0.85rem; line-height: 1.55; }
 }
@@ -458,86 +452,78 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
    ============================================================ */
 .artists-section { background: var(--bg-2); }
 
-.artist {
+.artists {
   display: grid;
-  grid-template-columns: minmax(280px, 5fr) 7fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: start;
 }
-.artist + .artist { margin-top: clamp(5rem, 10vw, 8rem); }
-.artist.flip { grid-template-columns: 7fr minmax(280px, 5fr); }
-.artist.flip .artist-media { order: 2; }
 
-.artist-media {
+.portrait {
   position: relative;
-  align-self: start;
-}
-@media (min-width: 901px) {
-  .artist-media {
-    position: sticky;
-    top: calc(var(--nav-h) + 28px);
-  }
-}
-.artist-media .frame {
-  position: relative;
-  border-radius: var(--radius);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius) var(--radius) 0 0;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  background: var(--tile);
 }
-.artist-media .frame img {
+.portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.8) sepia(0.18) contrast(1.05) brightness(0.97);
+  object-position: 50% 18%;
 }
-#viktor .artist-media .frame img { object-position: 50% 0%; }
-.artist-media::before {
+#viktor .portrait img { object-position: 58% 22%; }
+#patka .portrait img { object-position: 62% 18%; }
+/* spodný fade do pozadia sekcie, na ňom meno a štýl */
+.portrait::after {
   content: "";
   position: absolute;
-  inset: 14px -14px -14px 14px;
-  border: 1px solid var(--forest);
-  border-radius: var(--radius);
-  z-index: -1;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg-2) 0%, var(--bg-2) 6%, rgba(22, 28, 21, 0.9) 22%, rgba(22, 28, 21, 0.45) 40%, rgba(22, 28, 21, 0) 60%);
+  pointer-events: none;
 }
-.artist.flip .artist-media::before { inset: 14px 14px -14px -14px; }
-
-.artist-info h3 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
+.portrait-cap {
+  position: absolute;
+  z-index: 1;
+  inset: auto 0 0 0;
+  padding: 0 clamp(1rem, 2vw, 1.4rem) 1.1rem;
 }
-.artist-info .styles {
-  margin-top: 0.8rem;
-  font-size: 0.78rem;
+.portrait-cap h3 {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+}
+.artist .styles,
+.artist-dialog .styles {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  line-height: 1.6;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--leaf);
 }
-.artist-info .bio {
-  margin-top: 1.2rem;
-  max-width: 60ch;
-  color: var(--mist);
-}
-.artist-info .artist-cta {
-  margin-top: 1.6rem;
+
+.artist-actions {
+  margin-top: 1rem;
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
+.artist-actions .btn { flex: 1; }
+.artist-actions .btn-ghost:hover { color: var(--leaf-bright); }
 
 .gallery {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 8px;
   list-style: none;
 }
 .tile {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   padding: 0;
   cursor: zoom-in;
@@ -571,16 +557,77 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
 .tile:hover::after, .tile:focus-visible::after { opacity: 1; }
 
 @media (max-width: 900px) {
-  .artist, .artist.flip { grid-template-columns: 1fr; }
-  .artist.flip .artist-media { order: 0; }
-  .artist-media { max-width: 420px; }
-  .artist-media .frame { aspect-ratio: 4 / 5; }
+  .artists {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+    gap: 4rem;
+  }
 }
-@media (max-width: 520px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .gallery li:first-child { grid-column: span 2; }
-  .gallery li:first-child .tile { aspect-ratio: 1 / 1; }
-  .tile { border-radius: 4px; }
+
+/* O tatérovi: modálne okno */
+.artist-dialog {
+  margin: auto;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  padding: 0;
+  background: var(--bg-2);
+  color: var(--mist);
+  width: min(880px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.artist-dialog::backdrop {
+  background: rgba(13, 17, 12, 0.88);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.ad-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+.ad-media { position: relative; min-height: 100%; }
+.ad-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.ad-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--bg-2));
+}
+.ad-body { padding: clamp(1.75rem, 4vw, 3rem); }
+.ad-body h3 { font-size: clamp(2rem, 4vw, 2.8rem); padding-right: 2.5rem; }
+.ad-body .bio { margin-top: 1.2rem; }
+.ad-body .artist-cta {
+  margin-top: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ad-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(22, 28, 21, 0.72);
+}
+@media (max-width: 700px) {
+  .ad-inner { grid-template-columns: 1fr; }
+  .ad-media { min-height: 0; aspect-ratio: 4 / 3; }
+  .ad-media::after { background: linear-gradient(to top, var(--bg-2), transparent 45%); }
+  .ad-body { padding-top: 0.5rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .artist-dialog[open] { animation: dlg-in 0.4s var(--ease); }
+  @keyframes dlg-in {
+    from { opacity: 0; transform: translateY(16px); }
+  }
 }
 
 /* ============================================================
@@ -695,8 +742,7 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   border-radius: var(--radius);
   padding: clamp(1.5rem, 3.5vw, 2.5rem);
 }
-.contact-form h3 { font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-.contact-form .form-note { color: var(--sage); font-size: 0.95rem; margin-bottom: 1.8rem; }
+.contact-form h3 { font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 1.6rem; }
 .field { margin-bottom: 1.3rem; }
 .field label {
   display: block;
@@ -816,7 +862,7 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
 .previews .rm .icn { width: 0.8em; height: 0.8em; vertical-align: 0; }
 
 .contact-form .btn { width: 100%; margin-top: 0.5rem; }
-.sent-note { color: var(--sage); font-size: 0.88rem; text-align: center; margin-top: 0.9rem; }
+.sent-note { color: var(--sage); font-size: 0.9rem; text-align: center; margin-top: 0.9rem; }
 .form-status { margin-top: 1rem; font-size: 0.95rem; min-height: 1.4em; }
 .form-status.ok { color: var(--leaf-bright); }
 .form-status.fail { color: var(--clay-soft); }

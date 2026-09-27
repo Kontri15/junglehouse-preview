@@ -249,6 +249,23 @@
   document.querySelectorAll('[data-artist]').forEach((btn) => {
     btn.addEventListener('click', () => {
       artistSelect.value = btn.dataset.artist;
+      // CTA inside the "O tatérovi" modal: close it before the anchor scroll runs
+      const dlg = btn.closest('dialog');
+      if (dlg && dlg.open) dlg.close();
+    });
+  });
+
+  /* ---------- "O tatérovi" modal ---------- */
+  document.querySelectorAll('[data-dialog]').forEach((btn) => {
+    const dlg = document.getElementById(btn.dataset.dialog);
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    btn.addEventListener('click', () => dlg.showModal());
+  });
+  document.querySelectorAll('.artist-dialog').forEach((dlg) => {
+    dlg.querySelector('.ad-close').addEventListener('click', () => dlg.close());
+    // click on backdrop closes
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
     });
   });
 

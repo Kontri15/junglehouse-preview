@@ -11,12 +11,13 @@ Jednostránkový statický web (HTML + CSS + JS, žiadny build). Celý priečino
 
 ## Pred spustením treba doplniť / skontrolovať
 
-1. **Formulár (FormSubmit)** – posiela na `info@junglehouse.sk`.
-   - Po nasadení treba formulár **raz odoslať** a potvrdiť aktivačný e-mail, ktorý príde na info@junglehouse.sk. Dovtedy sa dopyty nedoručujú.
+1. **Formulár (FormSubmit)** – posiela na `junglehouse.tattoo@gmail.com`.
+   - Odosielanie je v náhľade vypnuté (`SUBMIT_DISABLED` v `script.js`) – pred spustením zmazať celý blok.
+   - Po nasadení treba formulár **raz odoslať** a potvrdiť aktivačný e-mail, ktorý príde na junglehouse.tattoo@gmail.com. Dovtedy sa dopyty nedoručujú.
    - V `index.html` uprav hidden pole `_next` na finálnu doménu (teraz `https://junglehouse.sk/dakujeme.html`).
-2. **Telefón** – v sekcii Kontakt je placeholder `+421 XXX XXX XXX` (aj v `tel:` odkaze). Doplň skutočné číslo.
-3. **Instagram tatérov** – všetky IG ikonky teraz vedú na `@junglehouse.tattoo`. Ak majú tatéri vlastné profily, uprav odkazy pri každom tatérovi.
-4. **Hero + ikonky v sekcii O nás** sú AI-generované vizuály (GPT Image 2) v palete brandu. Keď budú profi fotky interiéru, stačí vymeniť `assets/brand/hero-*.jpg`.
+2. **Čaká sa od klientky:** nová titulná fotka (`assets/brand/hero-*.jpg`), favicon, logo (hlavička + pätička), ochrana osobných údajov (odkaz v pätičke).
+3. **Instagram tatérov** – Lukáš @lukas.senkar, Viktor @orochi.tatt, Paťka @patrisia_ink.
+4. **Hero** je AI-generovaný vizuál (GPT Image 2) v palete brandu. Ikonky v sekcii O nás dodala klientka (`assets/icons/*.webp`).
    - **Logo** je tiež AI-rekreácia pôvodného loga s priehľadným pozadím (`logo-nav.png` bez riadku EST. 2026 pre hlavičku, `logo-full.png` pre pätičku). Ak klientka dodá originál vo vektore/PNG s alfou, stačí súbory vymeniť.
 5. **OG obrázok** – meta `og:image` používa relatívnu cestu; po nasadení ideálne zmeniť na absolútnu URL.
 
