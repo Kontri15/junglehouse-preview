@@ -24,6 +24,7 @@
   --radius-sm: 4px;
   --nav-h: 76px;
   --container: 1200px;
+  --nav-reach: 80px;
   --pad: clamp(1.25rem, 4vw, 2.5rem);
 }
 
@@ -184,9 +185,9 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   box-shadow: 0 1px 0 var(--line-soft);
 }
 .nav-inner {
-  max-width: var(--container);
+  max-width: calc(var(--container) + 2 * var(--nav-reach));
   margin-inline: auto;
-  padding-inline: var(--pad);
+  padding-inline: calc(var(--pad) + clamp(0px, (100% - var(--container)) / 2, var(--nav-reach))) var(--pad);
   height: var(--nav-h);
   display: flex;
   align-items: center;
@@ -231,7 +232,7 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
   display: flex;
   align-items: center;
   gap: 0.15rem;
-  margin-left: calc(clamp(1.1rem, 2.5vw, 2.2rem) * -0.45);
+  margin-inline: -0.45rem;
 }
 .nav-links .nav-social a:not(.btn) {
   display: inline-grid;
@@ -268,7 +269,7 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
     backdrop-filter: none;
   }
   .nav-links a:not(.btn) { font-family: 'Anton', sans-serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 0.06em; padding: 0.3rem 0.6rem; }
-  .nav-social { margin-left: 0; gap: 1rem; }
+  .nav-social { order: 1; margin-inline: 0; gap: 1rem; }
   .nav-links .nav-social a:not(.btn) { width: 52px; height: 52px; }
   .nav-social .icn { width: 1.7rem; height: 1.7rem; }
   body.menu-open .nav-links { opacity: 1; visibility: visible; }
