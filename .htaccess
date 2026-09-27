@@ -1,0 +1,6 @@
+# Jedna adresa webu: https://junglehouse.sk (bez www)
+# Websupport ukončuje HTTPS na proxy, preto sa protokol číta z X-Forwarded-Proto
+RewriteEngine on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^.*$ https://junglehouse.sk%{REQUEST_URI} [L,R=301]
