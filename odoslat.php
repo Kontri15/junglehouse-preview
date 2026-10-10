@@ -1,11 +1,12 @@
 <?php
 /* Jungle House · rezervačný formulár
    Pošle dopyt aj s fotkami e-mailom cez mail() hostingu Websupport
-   (odosielateľ na vlastnej doméne, SPF junglehouse.sk ho pokrýva). */
+   (odosielateľ na vlastnej doméne, SPF junglehouse.sk ho pokrýva).
+   Pozn.: ak je e-mail klienta (Reply-To) zhodný s adresátom, Websupport
+   pridá do predmetu [SPAM] — pri testovaní použi inú adresu. */
 
-const RECIPIENT = 'samuelkontros@gmail.com'; // TEST — po overení zmeniť na junglehouse.tattoo@gmail.com
+const RECIPIENT = 'junglehouse.tattoo@gmail.com';
 const SENDER = 'web@junglehouse.sk'; // schránka musí na Websupporte EXISTOVAŤ, inak mail() potichu nedoručí
-const PAUSED = false;
 const SENDER_NAME = 'Web Jungle House';
 const MAX_FILE_BYTES = 10485760;  // 10 MB na fotku
 const MAX_TOTAL_BYTES = 26214400; // 25 MB spolu
@@ -58,7 +59,6 @@ function uploads($name, $limit)
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') finish(false);
-if (PAUSED) finish(false);
 // honeypot: boti vyplnia skryté pole, tvárime sa, že prešlo
 if (field('_honey', 200) !== '') finish(true);
 

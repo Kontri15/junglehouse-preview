@@ -12,7 +12,7 @@ Jednostránkový statický web (HTML + CSS + JS, žiadny build). Celý priečino
 
 ## Stav
 
-1. **Formulár** – `odoslat.php` pošle dopyt aj s fotkami e-mailom cez `mail()` hostingu (odosielateľ web@junglehouse.sk, Reply-To = klient). Adresát je konštanta `RECIPIENT` v `odoslat.php`. Po odoslaní presmeruje na `dakujeme.html`, pri chybe na `./?formular=chyba`.
+1. **Formulár** – `odoslat.php` pošle dopyt aj s fotkami na `junglehouse.tattoo@gmail.com` cez `mail()` hostingu. Odosielateľ je schránka **web@junglehouse.sk** (na Websupporte musí existovať, inak sa mail potichu zahodí), Reply-To = e-mail klienta. Po odoslaní presmeruje na `dakujeme.html`, pri chybe na `./?formular=chyba`. Pri testoch nepoužívaj ako e-mail klienta adresu adresáta – Websupport by pridal do predmetu [SPAM].
 2. **Čaká sa od klientky:** nová titulná fotka (`assets/brand/hero-*.jpg`).
 3. **Instagram tatérov** – Lukáš @lukas.senkar, Viktor @orochi.tatt, Paťka @patrisia_ink.
 4. **Hero** je AI-generovaný vizuál (GPT Image 2) v palete brandu. Ikonky v sekcii O nás, logo (`logo-nav.png` bez riadku EST. 2026 pre hlavičku, `logo-full.png` pre pätičku) a favicon dodala klientka.

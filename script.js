@@ -484,8 +484,6 @@
       if (el.closest('.field').classList.contains('invalid')) validateField(el);
     });
   });
-  // DOČASNE: kým na junglehouse.sk nie je e-mailová schránka odosielateľa (Websupport inak mail nedoručí)
-  const SUBMIT_PAUSED = true;
   form.addEventListener('submit', (e) => {
     const fields = [...form.querySelectorAll('input[required], textarea[required]')];
     const allValid = fields.map(validateField).every(Boolean);
@@ -500,12 +498,6 @@
       e.preventDefault();
       status.className = 'form-status fail';
       status.textContent = 'Ešte spracúvame fotky, skús to o chvíľu znova.';
-      return;
-    }
-    if (SUBMIT_PAUSED) {
-      e.preventDefault();
-      status.className = 'form-status';
-      status.innerHTML = 'Formulár práve spúšťame. Zatiaľ nám prosím napíš na <a href="mailto:junglehouse.tattoo@gmail.com">junglehouse.tattoo@gmail.com</a> alebo cez <a href="https://www.instagram.com/junglehouse.tattoo/" target="_blank" rel="noopener">Instagram</a>.';
       return;
     }
     const submit = document.getElementById('f-submit');
