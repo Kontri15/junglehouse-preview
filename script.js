@@ -309,27 +309,14 @@
     renderSlide();
   };
 
-  const galleries = {};
   document.querySelectorAll('.gallery').forEach((list) => {
     const tiles = [...list.querySelectorAll('.tile')];
     const items = tiles.map((t) => {
       const img = t.querySelector('img');
       return { src: img.currentSrc || img.src, alt: img.alt };
     });
-    galleries[list.dataset.gallery] = items;
     tiles.forEach((tile, i) => {
       tile.addEventListener('click', () => openLightbox(items, i));
-    });
-  });
-
-  /* tatéri, variant V2 (?tateri=v2): mriežka prác skrytá, galéria sa otvára tlačidlom */
-  if (new URLSearchParams(location.search).get('tateri') === 'v2') {
-    document.querySelector('.artists')?.classList.add('v2');
-  }
-  document.querySelectorAll('[data-gallery-open]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const items = galleries[btn.dataset.galleryOpen];
-      if (items) openLightbox(items, 0);
     });
   });
 
@@ -497,8 +484,6 @@
       if (el.closest('.field').classList.contains('invalid')) validateField(el);
     });
   });
-  // PREVIEW: odosielanie vypnuté, kým klient neschváli frontend — potom zmaž tento blok
-  const SUBMIT_DISABLED = true;
   form.addEventListener('submit', (e) => {
     const fields = [...form.querySelectorAll('input[required], textarea[required]')];
     const allValid = fields.map(validateField).every(Boolean);
@@ -513,12 +498,6 @@
       e.preventDefault();
       status.className = 'form-status fail';
       status.textContent = 'Ešte spracúvame fotky, skús to o chvíľu znova.';
-      return;
-    }
-    if (SUBMIT_DISABLED) {
-      e.preventDefault();
-      status.className = 'form-status';
-      status.textContent = 'Toto je náhľadová verzia webu, odosielanie zatiaľ nie je zapnuté.';
       return;
     }
     const submit = document.getElementById('f-submit');
