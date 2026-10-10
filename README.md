@@ -20,6 +20,8 @@ Jednostránkový statický web (HTML + CSS + JS, žiadny build). Celý priečino
 
 ## Poznámky
 
+- **Cache:** proxy Websupportu drží `script.js`/`styles.css` niekoľko minút v cache. Pri zmene týchto súborov zvýš `?v=` v `index.html`, `dakujeme.html` a `ochrana-osobnych-udajov.html`.
+
 - Fotky prác sú zmenšené na max 1300 px (spolu ~5 MB); originály ostávajú v podkladoch.
 - Fonty sú self-hostované (GDPR, žiadne requesty na Google).
 - Formulár zmenšuje nahrané fotky v prehliadači (max 1600 px, JPEG), takže e-mail prílohy neprekročia limity.
