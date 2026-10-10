@@ -5,7 +5,7 @@
 
 const RECIPIENT = 'samuelkontros@gmail.com'; // TEST — po overení zmeniť na junglehouse.tattoo@gmail.com
 const SENDER = 'web@junglehouse.sk'; // schránka musí na Websupporte EXISTOVAŤ, inak mail() potichu nedoručí
-const PAUSED = true;  // DOČASNE, kým schránka neexistuje
+const PAUSED = false;
 const SENDER_NAME = 'Web Jungle House';
 const MAX_FILE_BYTES = 10485760;  // 10 MB na fotku
 const MAX_TOTAL_BYTES = 26214400; // 25 MB spolu
@@ -91,6 +91,8 @@ $text = "Nová rezervácia z webu junglehouse.sk\n\n"
 
 $boundary = 'jh-' . bin2hex(random_bytes(12));
 $headers = array(
+    'Date: ' . date(DATE_RFC2822),
+    'Message-ID: <' . bin2hex(random_bytes(16)) . '@junglehouse.sk>',
     'From: ' . header_text(SENDER_NAME) . ' <' . SENDER . '>',
     'Reply-To: ' . $email, // bez mena: zátvorky či úvodzovky v mene rozbijú parsovanie adresy
     'MIME-Version: 1.0',
@@ -98,8 +100,8 @@ $headers = array(
 );
 $body = "--$boundary\r\n"
     . "Content-Type: text/plain; charset=UTF-8\r\n"
-    . "Content-Transfer-Encoding: base64\r\n\r\n"
-    . chunk_split(base64_encode(str_replace("\n", "\r\n", $text)));
+    . "Content-Transfer-Encoding: quoted-printable\r\n\r\n"
+    . quoted_printable_encode(str_replace("\n", "\r\n", $text)) . "\r\n";
 foreach ($files as $f) {
     $body .= "--$boundary\r\n"
         . 'Content-Type: ' . $f['type'] . '; name="' . $f['name'] . "\"\r\n"
