@@ -507,6 +507,15 @@
     status.textContent = '';
   });
 
+  // odoslat.php vráti pri chybe ?formular=chyba
+  const params = new URLSearchParams(location.search);
+  if (params.get('formular') === 'chyba') {
+    status.className = 'form-status fail';
+    status.innerHTML = 'Správu sa nepodarilo odoslať. Skús to prosím znova alebo nám napíš na <a href="mailto:junglehouse.tattoo@gmail.com">junglehouse.tattoo@gmail.com</a>.';
+    params.delete('formular');
+    try { history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : '') + location.hash); } catch (_) { /* sandboxed preview */ }
+  }
+
   // restore the form when the user comes back via bfcache after submitting
   window.addEventListener('pageshow', (e) => {
     if (!e.persisted) return;

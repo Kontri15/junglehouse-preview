@@ -401,13 +401,9 @@
 
           </div>
 
-          <!-- Form: FormSubmit backend (aktivovaný na junglehouse.tattoo@gmail.com) -->
-          <form class="contact-form reveal" id="rezervacia" action="https://formsubmit.co/junglehouse.tattoo@gmail.com" method="POST" enctype="multipart/form-data" novalidate>
+          <!-- Form: odoslat.php pošle dopyt e-mailom (mail() na hostingu Websupport) -->
+          <form class="contact-form reveal" id="rezervacia" action="odoslat.php" method="POST" enctype="multipart/form-data" novalidate>
             <h3>Rezervuj si termín</h3>
-            <input type="hidden" name="_subject" value="Nová rezervácia z webu Jungle House">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://junglehouse.sk/dakujeme.html">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
             <div class="field">
@@ -449,7 +445,7 @@
               <label class="dropzone" id="dz-ref" for="f-ref">
                 <svg class="icn" aria-hidden="true"><use href="#i-upload-simple"/></svg>
                 <span>Pretiahni sem fotky alebo klikni a vyber</span>
-                <input type="file" id="f-ref" name="attachment" accept="image/*" multiple>
+                <input type="file" id="f-ref" name="referencie[]" accept="image/*" multiple>
               </label>
               <ul class="previews" id="prev-ref"></ul>
             </div>
@@ -458,7 +454,7 @@
               <label class="dropzone" id="dz-miesto" for="f-miesto">
                 <svg class="icn" aria-hidden="true"><use href="#i-upload-simple"/></svg>
                 <span>Pridaj fotku miesta, kam chceš tetovanie</span>
-                <input type="file" id="f-miesto" name="attachment" accept="image/*">
+                <input type="file" id="f-miesto" name="miesto" accept="image/*">
               </label>
               <ul class="previews" id="prev-miesto"></ul>
             </div>
